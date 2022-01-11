@@ -45,6 +45,8 @@ jobs:
           wget https://downloads.mysql.com/archives/get/p/23/file/mysql-8.0.26-winx64.zip
           unzip mysql-8.0.26-winx64.zip
           copy /y "mysql-8.0.26-winx64\lib\libmysql.dll" .
+          copy /y "mysql-8.0.26-winx64\lib\libmysql.lib" .
+          copy /y "mysql-8.0.26-winx64\include\mysql.h" .
           call "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           cd qtbase/src/plugins/sqldrivers
           qmake -- MYSQL_INCDIR="${{ github.workspace }}\mysql-8.0.26-winx64\include" MYSQL_LIBDIR="${{ github.workspace }}\mysql-8.0.26-winx64\lib"
