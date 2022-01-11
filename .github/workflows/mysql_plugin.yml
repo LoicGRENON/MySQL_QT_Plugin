@@ -42,12 +42,12 @@ jobs:
         shell: cmd
         run: |
           choco install wget
-          wget https://downloads.mysql.com/archives/get/p/23/file/mysql-8.0.25-winx64.zip
-          unzip mysql-8.0.25-winx64.zip
-          copy /y "mysql-8.0.25-winx64\lib\libmysql.dll" .
+          wget https://downloads.mysql.com/archives/get/p/23/file/mysql-8.0.26-winx64.zip
+          unzip mysql-8.0.26-winx64.zip
+          copy /y "mysql-8.0.26-winx64\lib\libmysql.dll" .
           call "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           cd qtbase/src/plugins/sqldrivers
-          qmake -- MYSQL_INCDIR="${{ github.workspace }}\mysql-8.0.25-winx64\include" MYSQL_LIBDIR="${{ github.workspace }}\mysql-8.0.25-winx64\lib"
+          qmake -- MYSQL_INCDIR="${{ github.workspace }}\mysql-8.0.26-winx64\include" MYSQL_LIBDIR="${{ github.workspace }}\mysql-8.0.26-winx64\lib"
           nmake sub-mysql
           nmake install
 #          wget https://downloads.mysql.com/archives/get/p/19/file/mysql-connector-c-6.1.11-winx64.zip
@@ -88,5 +88,6 @@ jobs:
       - name: upload
         uses: actions/upload-artifact@v2
         with:
-          path: qtbase/src/plugins/sqldrivers/plugins/sqldrivers/*qsqlmysql.${{ matrix.os.extension }}
+          #path: qtbase/src/plugins/sqldrivers/plugins/sqldrivers/*qsqlmysql.${{ matrix.os.extension }}
+          path: qtbase/src/plugins/sqldrivers/plugins/sqldrivers/*
           name: mysqlplugin-${{ matrix.os.name }}-Qt${{ matrix.qt.name }}
